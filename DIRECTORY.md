@@ -337,6 +337,7 @@
           * graph
             * [ConstrainedShortestPath](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/graph/ConstrainedShortestPath.java)
             * [StronglyConnectedComponentOptimized](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/graph/StronglyConnectedComponentOptimized.java)
+            * [TravelingSalesman](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/graph/TravelingSalesman.java)
           * greedyalgorithms
             * [ActivitySelection](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/greedyalgorithms/ActivitySelection.java)
             * [BandwidthAllocation](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/greedyalgorithms/BandwidthAllocation.java)
@@ -488,6 +489,7 @@
             * [MirrorOfMatrix](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/matrix/MirrorOfMatrix.java)
             * [PrintAMatrixInSpiralOrder](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/matrix/PrintAMatrixInSpiralOrder.java)
             * [RotateMatrixBy90Degrees](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/matrix/RotateMatrixBy90Degrees.java)
+            * [SolveSystem](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/matrix/SolveSystem.java)
             * utils
               * [MatrixUtil](https://github.com/TheAlgorithms/Java/blob/master/src/main/java/com/thealgorithms/matrix/utils/MatrixUtil.java)
           * misc
@@ -1024,6 +1026,7 @@
           * graph
             * [ConstrainedShortestPathTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/graph/ConstrainedShortestPathTest.java)
             * [StronglyConnectedComponentOptimizedTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/graph/StronglyConnectedComponentOptimizedTest.java)
+            * [TravelingSalesmanTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/graph/TravelingSalesmanTest.java)
           * greedyalgorithms
             * [ActivitySelectionTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/greedyalgorithms/ActivitySelectionTest.java)
             * [BandwidthAllocationTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/greedyalgorithms/BandwidthAllocationTest.java)
@@ -1159,6 +1162,7 @@
             * [MatrixUtilTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/matrix/MatrixUtilTest.java)
             * [MedianOfMatrixTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/matrix/MedianOfMatrixTest.java)
             * [MirrorOfMatrixTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/matrix/MirrorOfMatrixTest.java)
+            * [SolveSystemTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/matrix/SolveSystemTest.java)
             * [TestPrintMatrixInSpiralOrder](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/matrix/TestPrintMatrixInSpiralOrder.java)
           * misc
             * [ColorContrastRatioTest](https://github.com/TheAlgorithms/Java/blob/master/src/test/java/com/thealgorithms/misc/ColorContrastRatioTest.java)
