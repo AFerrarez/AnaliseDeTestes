@@ -1,0 +1,204 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MergeSortNoExtraSpace</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: MergeSortNoExtraSpace (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MergeSortNoExtraSpace</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * Implementation of Merge Sort without using extra space for merging.
+&nbsp; * This implementation performs in-place merging to sort the array of integers.
+&nbsp; */
+&nbsp;public final class MergeSortNoExtraSpace {
+&nbsp;    private MergeSortNoExtraSpace() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts the array using in-place merge sort algorithm.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @return the sorted array
+&nbsp;     * @throws IllegalArgumentException If the array contains negative numbers.
+&nbsp;     */
+&nbsp;    public static int[] sort(int[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (Arrays.stream(array).anyMatch(s -&gt; s &lt; 0)) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Implementation cannot sort negative numbers.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int maxElement = Arrays.stream(array).max().getAsInt() + 1;</b>
+<b class="nc">&nbsp;        mergeSort(array, 0, array.length - 1, maxElement);</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Recursively divides the array into two halves, sorts and merges them.
+&nbsp;     *
+&nbsp;     * @param array  the array to be sorted
+&nbsp;     * @param start  the starting index of the array
+&nbsp;     * @param end    the ending index of the array
+&nbsp;     * @param maxElement the value greater than any element in the array, used for encoding
+&nbsp;     */
+&nbsp;    public static void mergeSort(int[] array, int start, int end, int maxElement) {
+<b class="nc">&nbsp;        if (start &lt; end) {</b>
+<b class="nc">&nbsp;            final int middle = (start + end) &gt;&gt;&gt; 1;</b>
+<b class="nc">&nbsp;            mergeSort(array, start, middle, maxElement);</b>
+<b class="nc">&nbsp;            mergeSort(array, middle + 1, end, maxElement);</b>
+<b class="nc">&nbsp;            merge(array, start, middle, end, maxElement);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Merges two sorted subarrays [start...middle] and [middle+1...end] in place.
+&nbsp;     *
+&nbsp;     * @param array  the array containing the subarrays to be merged
+&nbsp;     * @param start  the starting index of the first subarray
+&nbsp;     * @param middle    the ending index of the first subarray and starting index of the second subarray
+&nbsp;     * @param end    the ending index of the second subarray
+&nbsp;     * @param maxElement the value greater than any element in the array, used for encoding
+&nbsp;     */
+&nbsp;    private static void merge(int[] array, int start, int middle, int end, int maxElement) {
+<b class="nc">&nbsp;        int i = start;</b>
+<b class="nc">&nbsp;        int j = middle + 1;</b>
+<b class="nc">&nbsp;        int k = start;</b>
+<b class="nc">&nbsp;        while (i &lt;= middle &amp;&amp; j &lt;= end) {</b>
+<b class="nc">&nbsp;            if (array[i] % maxElement &lt;= array[j] % maxElement) {</b>
+<b class="nc">&nbsp;                array[k] = array[k] + (array[i] % maxElement) * maxElement;</b>
+<b class="nc">&nbsp;                k++;</b>
+<b class="nc">&nbsp;                i++;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                array[k] = array[k] + (array[j] % maxElement) * maxElement;</b>
+<b class="nc">&nbsp;                k++;</b>
+<b class="nc">&nbsp;                j++;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        while (i &lt;= middle) {</b>
+<b class="nc">&nbsp;            array[k] = array[k] + (array[i] % maxElement) * maxElement;</b>
+<b class="nc">&nbsp;            k++;</b>
+<b class="nc">&nbsp;            i++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        while (j &lt;= end) {</b>
+<b class="nc">&nbsp;            array[k] = array[k] + (array[j] % maxElement) * maxElement;</b>
+<b class="nc">&nbsp;            k++;</b>
+<b class="nc">&nbsp;            j++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (i = start; i &lt;= end; i++) {</b>
+<b class="nc">&nbsp;            array[i] = array[i] / maxElement;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

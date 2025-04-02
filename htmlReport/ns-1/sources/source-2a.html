@@ -1,0 +1,431 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SpreadSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: SpreadSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpreadSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/44)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SpreadSort$Bucket</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/68)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * SpreadSort is a highly efficient sorting algorithm suitable for large datasets.
+&nbsp; * It distributes elements into buckets and recursively sorts these buckets.
+&nbsp; * This implementation is generic and can sort any array of elements that extend Comparable.
+&nbsp; */
+&nbsp;public class SpreadSort implements SortAlgorithm {
+&nbsp;    private static final int MAX_INSERTION_SORT_THRESHOLD = 1000;
+&nbsp;    private static final int MAX_INITIAL_BUCKET_CAPACITY = 1000;
+&nbsp;    private static final int MAX_MIN_BUCKETS = 100;
+&nbsp;
+&nbsp;    private final int insertionSortThreshold;
+&nbsp;    private final int initialBucketCapacity;
+&nbsp;    private final int minBuckets;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor to initialize the SpreadSort algorithm with custom parameters.
+&nbsp;     *
+&nbsp;     * @param insertionSortThreshold the threshold for using insertion sort for small segments (1-1000)
+&nbsp;     * @param initialBucketCapacity  the initial capacity for each bucket (1-1000)
+&nbsp;     * @param minBuckets             the minimum number of buckets to use (1-100)
+&nbsp;     */
+<b class="nc">&nbsp;    public SpreadSort(int insertionSortThreshold, int initialBucketCapacity, int minBuckets) {</b>
+<b class="nc">&nbsp;        if (insertionSortThreshold &lt; 1 || insertionSortThreshold &gt; MAX_INSERTION_SORT_THRESHOLD) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Insertion sort threshold must be between 1 and &quot; + MAX_INSERTION_SORT_THRESHOLD);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (initialBucketCapacity &lt; 1 || initialBucketCapacity &gt; MAX_INITIAL_BUCKET_CAPACITY) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Initial bucket capacity must be between 1 and &quot; + MAX_INITIAL_BUCKET_CAPACITY);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (minBuckets &lt; 1 || minBuckets &gt; MAX_MIN_BUCKETS) {</b>
+<b class="nc">&nbsp;            throw new IllegalArgumentException(&quot;Minimum number of buckets must be between 1 and &quot; + MAX_MIN_BUCKETS);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        this.insertionSortThreshold = insertionSortThreshold;</b>
+<b class="nc">&nbsp;        this.initialBucketCapacity = initialBucketCapacity;</b>
+<b class="nc">&nbsp;        this.minBuckets = minBuckets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Default constructor with predefined values.
+&nbsp;     */
+&nbsp;    public SpreadSort() {
+<b class="nc">&nbsp;        this(16, 16, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts an array using the SpreadSort algorithm.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     * @return the sorted array
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        spreadSort(array, 0, array.length - 1);</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Internal method to sort an array segment using the SpreadSort algorithm.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param left  the left boundary of the segment
+&nbsp;     * @param right the right boundary of the segment
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; void spreadSort(final T[] array, final int left, final int right) {
+<b class="nc">&nbsp;        if (left &gt;= right) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // Base case for small segments
+<b class="nc">&nbsp;        if (right - left &lt; insertionSortThreshold) {</b>
+<b class="nc">&nbsp;            insertionSort(array, left, right);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        T min = findMin(array, left, right);</b>
+<b class="nc">&nbsp;        T max = findMax(array, left, right);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (min.equals(max)) {</b>
+&nbsp;            return; // All elements are the same
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int numBuckets = calculateNumBuckets(right - left + 1);</b>
+<b class="nc">&nbsp;        final Bucket&lt;T&gt;[] buckets = createBuckets(numBuckets);</b>
+&nbsp;
+<b class="nc">&nbsp;        distributeElements(array, left, right, min, max, numBuckets, buckets);</b>
+<b class="nc">&nbsp;        collectElements(array, left, buckets);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds the minimum element in the specified segment of the array.
+&nbsp;     *
+&nbsp;     * @param array the array to search
+&nbsp;     * @param left  the left boundary of the segment
+&nbsp;     * @param right the right boundary of the segment
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     * @return the minimum element
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T findMin(final T[] array, final int left, final int right) {
+<b class="nc">&nbsp;        T min = array[left];</b>
+<b class="nc">&nbsp;        for (int i = left + 1; i &lt;= right; i++) {</b>
+<b class="nc">&nbsp;            if (SortUtils.less(array[i], min)) {</b>
+<b class="nc">&nbsp;                min = array[i];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return min;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds the maximum element in the specified segment of the array.
+&nbsp;     *
+&nbsp;     * @param array the array to search
+&nbsp;     * @param left  the left boundary of the segment
+&nbsp;     * @param right the right boundary of the segment
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     * @return the maximum element
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T findMax(final T[] array, final int left, final int right) {
+<b class="nc">&nbsp;        T max = array[left];</b>
+<b class="nc">&nbsp;        for (int i = left + 1; i &lt;= right; i++) {</b>
+<b class="nc">&nbsp;            if (SortUtils.greater(array[i], max)) {</b>
+<b class="nc">&nbsp;                max = array[i];</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return max;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the number of buckets needed based on the size of the segment.
+&nbsp;     *
+&nbsp;     * @param segmentSize the size of the segment
+&nbsp;     * @return the number of buckets
+&nbsp;     */
+&nbsp;    private int calculateNumBuckets(final int segmentSize) {
+<b class="nc">&nbsp;        int numBuckets = segmentSize / insertionSortThreshold;</b>
+<b class="nc">&nbsp;        return Math.max(numBuckets, minBuckets);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates an array of buckets.
+&nbsp;     *
+&nbsp;     * @param numBuckets the number of buckets to create
+&nbsp;     * @param &lt;T&gt;        the type of elements in the buckets
+&nbsp;     * @return an array of buckets
+&nbsp;     */
+&nbsp;    @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; Bucket&lt;T&gt;[] createBuckets(final int numBuckets) {
+<b class="nc">&nbsp;        final Bucket&lt;T&gt;[] buckets = new Bucket[numBuckets];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; numBuckets; i++) {</b>
+<b class="nc">&nbsp;            buckets[i] = new Bucket&lt;&gt;(initialBucketCapacity);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return buckets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Distributes elements of the array segment into buckets.
+&nbsp;     *
+&nbsp;     * @param array      the array to be sorted
+&nbsp;     * @param left       the left boundary of the segment
+&nbsp;     * @param right      the right boundary of the segment
+&nbsp;     * @param min        the minimum element in the segment
+&nbsp;     * @param max        the maximum element in the segment
+&nbsp;     * @param numBuckets the number of buckets
+&nbsp;     * @param buckets    the array of buckets
+&nbsp;     * @param &lt;T&gt;        the type of elements in the array
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; void distributeElements(final T[] array, final int left, final int right, final T min, final T max, final int numBuckets, final Bucket&lt;T&gt;[] buckets) {
+<b class="nc">&nbsp;        final double range = max.compareTo(min);</b>
+<b class="nc">&nbsp;        for (int i = left; i &lt;= right; i++) {</b>
+<b class="nc">&nbsp;            final int scaleRangeDifference = array[i].compareTo(min) * numBuckets;</b>
+<b class="nc">&nbsp;            int bucketIndex = (int) (scaleRangeDifference / (range + 1));</b>
+<b class="nc">&nbsp;            buckets[bucketIndex].add(array[i]);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Collects elements from the buckets back into the array.
+&nbsp;     *
+&nbsp;     * @param array   the array to be sorted
+&nbsp;     * @param left    the left boundary of the segment
+&nbsp;     * @param buckets the array of buckets
+&nbsp;     * @param &lt;T&gt;     the type of elements in the array
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; void collectElements(final T[] array, final int left, final Bucket&lt;T&gt;[] buckets) {
+<b class="nc">&nbsp;        int index = left;</b>
+<b class="nc">&nbsp;        for (Bucket&lt;T&gt; bucket : buckets) {</b>
+<b class="nc">&nbsp;            if (bucket.size() &gt; 0) {</b>
+<b class="nc">&nbsp;                T[] bucketArray = bucket.toArray();</b>
+<b class="nc">&nbsp;                spreadSort(bucketArray, 0, bucketArray.length - 1);</b>
+<b class="nc">&nbsp;                for (T element : bucketArray) {</b>
+<b class="nc">&nbsp;                    array[index++] = element;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Insertion sort implementation for small segments.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param left  the left boundary of the segment
+&nbsp;     * @param right the right boundary of the segment
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; void insertionSort(final T[] array, final int left, final int right) {
+<b class="nc">&nbsp;        for (int i = left + 1; i &lt;= right; i++) {</b>
+<b class="nc">&nbsp;            T key = array[i];</b>
+<b class="nc">&nbsp;            int j = i - 1;</b>
+<b class="nc">&nbsp;            while (j &gt;= left &amp;&amp; SortUtils.greater(array[j], key)) {</b>
+<b class="nc">&nbsp;                array[j + 1] = array[j];</b>
+<b class="nc">&nbsp;                j--;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            array[j + 1] = key;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Bucket class to hold elements during sorting.
+&nbsp;     *
+&nbsp;     * @param &lt;T&gt; the type of elements in the bucket
+&nbsp;     */
+&nbsp;    private static class Bucket&lt;T extends Comparable&lt;T&gt;&gt; {
+&nbsp;        private T[] elements;
+&nbsp;        private int size;
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Constructs a new bucket with initial capacity.
+&nbsp;         */
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+<b class="nc">&nbsp;        Bucket(int initialBucketCapacity) {</b>
+<b class="nc">&nbsp;            elements = (T[]) new Comparable[initialBucketCapacity];</b>
+<b class="nc">&nbsp;            size = 0;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Adds an element to the bucket.
+&nbsp;         *
+&nbsp;         * @param element the element to add
+&nbsp;         */
+&nbsp;        void add(T element) {
+<b class="nc">&nbsp;            if (size == elements.length) {</b>
+<b class="nc">&nbsp;                elements = Arrays.copyOf(elements, size * 2);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            elements[size++] = element;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns the number of elements in the bucket.
+&nbsp;         *
+&nbsp;         * @return the size of the bucket
+&nbsp;         */
+&nbsp;        int size() {
+<b class="nc">&nbsp;            return size;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        /**
+&nbsp;         * Returns an array containing all elements in the bucket.
+&nbsp;         *
+&nbsp;         * @return an array containing all elements in the bucket
+&nbsp;         */
+&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)
+&nbsp;        T[] toArray() {
+<b class="nc">&nbsp;            return Arrays.copyOf(elements, size);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

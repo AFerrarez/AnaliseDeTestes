@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TreeSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: TreeSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TreeSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/47)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import static com.thealgorithms.sorts.SortUtils.print;
+&nbsp;
+&nbsp;import com.thealgorithms.datastructures.trees.BSTRecursiveGeneric;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * &lt;h1&gt; Implementation of the Tree Sort algorithm&lt;/h1&gt;
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Tree Sort: A sorting algorithm which constructs a Binary Search Tree using
+&nbsp; * the unsorted data and then outputs the data by inorder traversal of the tree.
+&nbsp; *
+&nbsp; * Reference: https://en.wikipedia.org/wiki/Tree_sort
+&nbsp; * &lt;/p&gt;
+&nbsp; *
+&nbsp; * @author Madhur Panwar (https://github.com/mdrpanwar)
+&nbsp; */
+<b class="nc">&nbsp;public class TreeSort implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] unsortedArray) {
+<b class="nc">&nbsp;        return doTreeSortArray(unsortedArray);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; List&lt;T&gt; sort(List&lt;T&gt; unsortedList) {
+<b class="nc">&nbsp;        return doTreeSortList(unsortedList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T[] doTreeSortArray(T[] unsortedArray) {
+&nbsp;        // create a generic BST tree
+<b class="nc">&nbsp;        BSTRecursiveGeneric&lt;T&gt; tree = new BSTRecursiveGeneric&lt;T&gt;();</b>
+&nbsp;
+&nbsp;        // add all elements to the tree
+<b class="nc">&nbsp;        for (T element : unsortedArray) {</b>
+<b class="nc">&nbsp;            tree.add(element);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // get the sorted list by inorder traversal of the tree
+<b class="nc">&nbsp;        List&lt;T&gt; sortedList = tree.inorderSort();</b>
+&nbsp;
+&nbsp;        // add the elements back to the initial array
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (T element : sortedList) {</b>
+<b class="nc">&nbsp;            unsortedArray[i++] = element;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // return the array
+<b class="nc">&nbsp;        return unsortedArray;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; List&lt;T&gt; doTreeSortList(Iterable&lt;T&gt; unsortedList) {
+&nbsp;        // create a generic BST tree
+<b class="nc">&nbsp;        BSTRecursiveGeneric&lt;T&gt; tree = new BSTRecursiveGeneric&lt;T&gt;();</b>
+&nbsp;
+&nbsp;        // add all elements to the tree
+<b class="nc">&nbsp;        for (T element : unsortedList) {</b>
+<b class="nc">&nbsp;            tree.add(element);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // get the sorted list by inorder traversal of the tree and return it
+<b class="nc">&nbsp;        return tree.inorderSort();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+<b class="nc">&nbsp;        TreeSort treeSort = new TreeSort();</b>
+&nbsp;
+&nbsp;        // ==== Integer Array =======
+<b class="nc">&nbsp;        System.out.println(&quot;Testing for Integer Array....&quot;);</b>
+<b class="nc">&nbsp;        Integer[] a = {3, -7, 45, 1, 343, -5, 2, 9};</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;unsorted: &quot;);</b>
+<b class="nc">&nbsp;        print(a);</b>
+<b class="nc">&nbsp;        a = treeSort.sort(a);</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;sorted: &quot;);</b>
+<b class="nc">&nbsp;        print(a);</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;
+&nbsp;        // ==== Integer List =======
+<b class="nc">&nbsp;        System.out.println(&quot;Testing for Integer List....&quot;);</b>
+<b class="nc">&nbsp;        List&lt;Integer&gt; intList = List.of(3, -7, 45, 1, 343, -5, 2, 9);</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;unsorted: &quot;);</b>
+<b class="nc">&nbsp;        print(intList);</b>
+<b class="nc">&nbsp;        intList = treeSort.sort(intList);</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;sorted: &quot;);</b>
+<b class="nc">&nbsp;        print(intList);</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;
+&nbsp;        // ==== String Array =======
+<b class="nc">&nbsp;        System.out.println(&quot;Testing for String Array....&quot;);</b>
+<b class="nc">&nbsp;        String[] b = {</b>
+&nbsp;            &quot;banana&quot;,
+&nbsp;            &quot;berry&quot;,
+&nbsp;            &quot;orange&quot;,
+&nbsp;            &quot;grape&quot;,
+&nbsp;            &quot;peach&quot;,
+&nbsp;            &quot;cherry&quot;,
+&nbsp;            &quot;apple&quot;,
+&nbsp;            &quot;pineapple&quot;,
+&nbsp;        };
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;unsorted: &quot;);</b>
+<b class="nc">&nbsp;        print(b);</b>
+<b class="nc">&nbsp;        b = treeSort.sort(b);</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;sorted: &quot;);</b>
+<b class="nc">&nbsp;        print(b);</b>
+<b class="nc">&nbsp;        System.out.println();</b>
+&nbsp;
+&nbsp;        // ==== String List =======
+<b class="nc">&nbsp;        System.out.println(&quot;Testing for String List....&quot;);</b>
+<b class="nc">&nbsp;        List&lt;String&gt; stringList = List.of(&quot;banana&quot;, &quot;berry&quot;, &quot;orange&quot;, &quot;grape&quot;, &quot;peach&quot;, &quot;cherry&quot;, &quot;apple&quot;, &quot;pineapple&quot;);</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;unsorted: &quot;);</b>
+<b class="nc">&nbsp;        print(stringList);</b>
+<b class="nc">&nbsp;        stringList = treeSort.sort(stringList);</b>
+<b class="nc">&nbsp;        System.out.printf(&quot;%-10s&quot;, &quot;sorted: &quot;);</b>
+<b class="nc">&nbsp;        print(stringList);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

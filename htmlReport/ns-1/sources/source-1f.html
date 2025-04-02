@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PigeonholeSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: PigeonholeSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PigeonholeSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public final class PigeonholeSort {
+&nbsp;    private PigeonholeSort() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts the given array using the pigeonhole sort algorithm.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @throws IllegalArgumentException if any negative integers are found
+&nbsp;     * @return the sorted array
+&nbsp;     */
+&nbsp;    public static int[] sort(int[] array) {
+&nbsp;
+<b class="nc">&nbsp;        checkForNegativeInput(array);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int maxElement = Arrays.stream(array).max().orElseThrow();</b>
+<b class="nc">&nbsp;        final List&lt;List&lt;Integer&gt;&gt; pigeonHoles = createPigeonHoles(maxElement);</b>
+&nbsp;
+<b class="nc">&nbsp;        populatePigeonHoles(array, pigeonHoles);</b>
+<b class="nc">&nbsp;        collectFromPigeonHoles(array, pigeonHoles);</b>
+&nbsp;
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the array contains any negative integers.
+&nbsp;     *
+&nbsp;     * @param array the array to be checked
+&nbsp;     * @throws IllegalArgumentException if any negative integers are found
+&nbsp;     */
+&nbsp;    private static void checkForNegativeInput(int[] array) {
+<b class="nc">&nbsp;        for (final int number : array) {</b>
+<b class="nc">&nbsp;            if (number &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Array contains negative integers.&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Creates pigeonholes for sorting using an ArrayList of ArrayLists.
+&nbsp;     *
+&nbsp;     * @param maxElement the maximum element in the array
+&nbsp;     * @return an ArrayList of ArrayLists
+&nbsp;     */
+&nbsp;    private static List&lt;List&lt;Integer&gt;&gt; createPigeonHoles(int maxElement) {
+<b class="nc">&nbsp;        List&lt;List&lt;Integer&gt;&gt; pigeonHoles = new ArrayList&lt;&gt;(maxElement + 1);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt;= maxElement; i++) {</b>
+<b class="nc">&nbsp;            pigeonHoles.add(new ArrayList&lt;&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return pigeonHoles;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Populates the pigeonholes with elements from the array.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param pigeonHoles the pigeonholes to be populated
+&nbsp;     */
+&nbsp;    private static void populatePigeonHoles(int[] array, List&lt;List&lt;Integer&gt;&gt; pigeonHoles) {
+<b class="nc">&nbsp;        for (int element : array) {</b>
+<b class="nc">&nbsp;            pigeonHoles.get(element).add(element);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Collects sorted elements from the pigeonholes back into the array.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param pigeonHoles the populated pigeonholes
+&nbsp;     */
+&nbsp;    private static void collectFromPigeonHoles(int[] array, Iterable&lt;List&lt;Integer&gt;&gt; pigeonHoles) {
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (final var pigeonHole : pigeonHoles) {</b>
+<b class="nc">&nbsp;            for (final int element : pigeonHole) {</b>
+<b class="nc">&nbsp;                array[index++] = element;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

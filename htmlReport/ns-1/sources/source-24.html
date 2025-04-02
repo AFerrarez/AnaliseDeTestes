@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ShellSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: ShellSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ShellSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+<b class="nc">&nbsp;public class ShellSort implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Implements generic shell sort.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted.
+&nbsp;     * @param &lt;T&gt; the type of elements in the array.
+&nbsp;     * @return the sorted array.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int gap = calculateInitialGap(array.length);</b>
+&nbsp;
+<b class="nc">&nbsp;        while (gap &gt; 0) {</b>
+<b class="nc">&nbsp;            performGapInsertionSort(array, gap);</b>
+<b class="nc">&nbsp;            gap = calculateNextGap(gap);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the initial gap value using the Knuth sequence.
+&nbsp;     *
+&nbsp;     * @param length the length of the array.
+&nbsp;     * @return the initial gap value.
+&nbsp;     */
+&nbsp;    private int calculateInitialGap(final int length) {
+<b class="nc">&nbsp;        int gap = 1;</b>
+<b class="nc">&nbsp;        while (gap &lt; length / 3) {</b>
+<b class="nc">&nbsp;            gap = 3 * gap + 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return gap;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the next gap value.
+&nbsp;     *
+&nbsp;     * @param currentGap the current gap value.
+&nbsp;     * @return the next gap value.
+&nbsp;     */
+&nbsp;    private int calculateNextGap(final int currentGap) {
+<b class="nc">&nbsp;        return currentGap / 3;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs an insertion sort for the specified gap value.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted.
+&nbsp;     * @param gap the current gap value.
+&nbsp;     * @param &lt;T&gt; the type of elements in the array.
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; void performGapInsertionSort(final T[] array, final int gap) {
+<b class="nc">&nbsp;        for (int i = gap; i &lt; array.length; i++) {</b>
+<b class="nc">&nbsp;            T temp = array[i];</b>
+&nbsp;            int j;
+<b class="nc">&nbsp;            for (j = i; j &gt;= gap &amp;&amp; SortUtils.less(temp, array[j - gap]); j -= gap) {</b>
+<b class="nc">&nbsp;                array[j] = array[j - gap];</b>
+&nbsp;            }
+<b class="nc">&nbsp;            array[j] = temp;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

@@ -1,8 +1,11 @@
 package com.thealgorithms.sorts;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 /**
  * @author Aitor Fidalgo (https://github.com/aitorfi)
@@ -91,4 +94,43 @@ public class BubbleSortTest {
         };
         assertArrayEquals(outputArray, expectedOutput);
     }
+
+
+    @Test
+    public void bubbleSortArrayWithDuplicates() {
+        Integer[] inputArray = {5, 5, 5, 5, 5};
+        Integer[] outputArray = bubbleSort.sort(inputArray);
+        Integer[] expectedOutput = {5, 5, 5, 5, 5};
+        assertArrayEquals(outputArray, expectedOutput);
+    }
+
+    @Test
+    public void bubbleSortArrayInDescendingOrder() {
+        Integer[] inputArray = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        Integer[] outputArray = bubbleSort.sort(inputArray);
+        Integer[] expectedOutput = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        assertArrayEquals(outputArray, expectedOutput);
+    }
+
+    @Test
+    public void bubbleSortLargeArray() {
+        Integer[] inputArray = new Integer[1000];
+        for (int i = 0; i < 1000; i++) {
+            inputArray[i] = (int) (Math.random() * 1000);
+        }
+        Integer[] outputArray = bubbleSort.sort(inputArray);
+        Arrays.sort(inputArray);
+        assertArrayEquals(outputArray, inputArray);
+    }
+
+
+    @Test
+    public void bubbleSortNullArray() {
+        Integer[] inputArray = null;
+        assertThrows(NullPointerException.class, () -> {
+            bubbleSort.sort(inputArray);
+        });
+    }
+
+
 }

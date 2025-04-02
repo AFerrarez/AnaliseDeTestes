@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CircleSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: CircleSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CircleSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+<b class="nc">&nbsp;public class CircleSort implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    /* This method implements the circle sort
+&nbsp;     * @param array The array to be sorted
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        while (doSort(array, 0, array.length - 1)) {</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Recursively sorts the array in a circular manner by comparing elements
+&nbsp;     * from the start and end of the current segment.
+&nbsp;     *
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     * @param array The array to be sorted
+&nbsp;     * @param left  The left boundary of the current segment being sorted
+&nbsp;     * @param right The right boundary of the current segment being sorted
+&nbsp;     * @return true if any elements were swapped during the sort; false otherwise
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; boolean doSort(final T[] array, final int left, final int right) {
+<b class="nc">&nbsp;        boolean swapped = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (left == right) {</b>
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        int low = left;</b>
+<b class="nc">&nbsp;        int high = right;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (low &lt; high) {</b>
+<b class="nc">&nbsp;            if (array[low].compareTo(array[high]) &gt; 0) {</b>
+<b class="nc">&nbsp;                SortUtils.swap(array, low, high);</b>
+<b class="nc">&nbsp;                swapped = true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            low++;</b>
+<b class="nc">&nbsp;            high--;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if (low == high &amp;&amp; array[low].compareTo(array[high + 1]) &gt; 0) {</b>
+<b class="nc">&nbsp;            SortUtils.swap(array, low, high + 1);</b>
+<b class="nc">&nbsp;            swapped = true;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        final int mid = left + (right - left) / 2;</b>
+<b class="nc">&nbsp;        final boolean leftHalfSwapped = doSort(array, left, mid);</b>
+<b class="nc">&nbsp;        final boolean rightHalfSwapped = doSort(array, mid + 1, right);</b>
+&nbsp;
+<b class="nc">&nbsp;        return swapped || leftHalfSwapped || rightHalfSwapped;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

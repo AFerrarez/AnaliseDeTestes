@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > DutchNationalFlagSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: DutchNationalFlagSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DutchNationalFlagSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;/**
+&nbsp; * The Dutch National Flag Sort sorts a sequence of values into three permutations which are defined
+&nbsp; * by a value given as the indented middle. First permutation: values less than middle. Second
+&nbsp; * permutation: values equal middle. Third permutation: values greater than middle. If no indented
+&nbsp; * middle is given, this implementation will use a value from the given Array. This value is the one
+&nbsp; * positioned in the arrays&#39; middle if the arrays&#39; length is odd. If the arrays&#39; length is even, the
+&nbsp; * value left to the middle will be used. More information and Pseudocode:
+&nbsp; * https://en.wikipedia.org/wiki/Dutch_national_flag_problem
+&nbsp; */
+<b class="nc">&nbsp;public class DutchNationalFlagSort implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        return dutchNationalFlagSort(array, array[(int) Math.ceil((array.length) / 2.0) - 1]);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array, T intendedMiddle) {
+<b class="nc">&nbsp;        return dutchNationalFlagSort(array, intendedMiddle);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T[] dutchNationalFlagSort(final T[] array, final T intendedMiddle) {
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        int j = 0;</b>
+<b class="nc">&nbsp;        int k = array.length - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (j &lt;= k) {</b>
+<b class="nc">&nbsp;            if (0 &gt; array[j].compareTo(intendedMiddle)) {</b>
+<b class="nc">&nbsp;                SortUtils.swap(array, i, j);</b>
+<b class="nc">&nbsp;                j++;</b>
+<b class="nc">&nbsp;                i++;</b>
+<b class="nc">&nbsp;            } else if (0 &lt; array[j].compareTo(intendedMiddle)) {</b>
+<b class="nc">&nbsp;                SortUtils.swap(array, j, k);</b>
+<b class="nc">&nbsp;                k--;</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                j++;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

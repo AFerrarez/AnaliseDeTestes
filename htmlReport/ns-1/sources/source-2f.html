@@ -1,0 +1,442 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Task</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: Task (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Task</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;/**
+&nbsp; * @author &lt;a href=&quot;https://github.com/siddhant2002&quot;&gt;Siddhant Swarup Mallick&lt;/a&gt;
+&nbsp; * Program description - To sort the LinkList as per sorting technique
+&nbsp; */
+&nbsp;public class LinkListSort {
+&nbsp;
+&nbsp;    public static boolean isSorted(int[] p, int option) {
+&nbsp;        int[] a = p;
+&nbsp;        // Array is taken as input from test class
+&nbsp;        int[] b = p;
+&nbsp;        // array similar to a
+&nbsp;        int ch = option;
+&nbsp;        // Choice is choosed as any number from 1 to 3 (So the linked list will be
+&nbsp;        // sorted by Merge sort technique/Insertion sort technique/Heap sort technique)
+&nbsp;        switch (ch) {
+&nbsp;        case 1:
+&nbsp;            Task nm = new Task();
+&nbsp;            Node start = null;
+&nbsp;            Node prev = null;
+&nbsp;            Node fresh;
+&nbsp;            Node ptr;
+&nbsp;            for (int i = 0; i &lt; a.length; i++) {
+&nbsp;                // New nodes are created and values are added
+&nbsp;                fresh = new Node(); // Node class is called
+&nbsp;                fresh.val = a[i]; // Node val is stored
+&nbsp;                if (start == null) {
+&nbsp;                    start = fresh;
+&nbsp;                } else {
+&nbsp;                    prev.next = fresh;
+&nbsp;                }
+&nbsp;                prev = fresh;
+&nbsp;            }
+&nbsp;            start = nm.sortByMergeSort(start);
+&nbsp;            // method is being called
+&nbsp;            int i = 0;
+&nbsp;            for (ptr = start; ptr != null; ptr = ptr.next) {
+&nbsp;                a[i++] = ptr.val;
+&nbsp;                // storing the sorted values in the array
+&nbsp;            }
+&nbsp;            Arrays.sort(b);
+&nbsp;            // array b is sorted and it will return true when checked with sorted list
+&nbsp;            LinkListSort uu = new LinkListSort();
+&nbsp;            return uu.compare(a, b);
+&nbsp;            // The given array and the expected array is checked if both are same then true
+&nbsp;            // is displayed else false is displayed
+&nbsp;        case 2:
+&nbsp;            Node start1 = null;
+&nbsp;            Node prev1 = null;
+&nbsp;            Node fresh1;
+&nbsp;            Node ptr1;
+&nbsp;            for (int i1 = 0; i1 &lt; a.length; i1++) {
+&nbsp;                // New nodes are created and values are added
+&nbsp;                fresh1 = new Node(); // New node is created
+&nbsp;                fresh1.val = a[i1]; // Value is stored in the value part of the node
+&nbsp;                if (start1 == null) {
+&nbsp;                    start1 = fresh1;
+&nbsp;                } else {
+&nbsp;                    prev1.next = fresh1;
+&nbsp;                }
+&nbsp;                prev1 = fresh1;
+&nbsp;            }
+&nbsp;            Task1 kk = new Task1();
+&nbsp;            start1 = kk.sortByInsertionSort(start1);
+&nbsp;            // method is being called
+&nbsp;            int i1 = 0;
+&nbsp;            for (ptr1 = start1; ptr1 != null; ptr1 = ptr1.next) {
+&nbsp;                a[i1++] = ptr1.val;
+&nbsp;                // storing the sorted values in the array
+&nbsp;            }
+&nbsp;            LinkListSort uu1 = new LinkListSort();
+&nbsp;            // array b is not sorted and it will return false when checked with sorted list
+&nbsp;            return uu1.compare(a, b);
+&nbsp;            // The given array and the expected array is checked if both are same then true
+&nbsp;            // is displayed else false is displayed
+&nbsp;        case 3:
+&nbsp;            Task2 mm = new Task2();
+&nbsp;            Node start2 = null;
+&nbsp;            Node prev2 = null;
+&nbsp;            Node fresh2;
+&nbsp;            Node ptr2;
+&nbsp;            for (int i2 = 0; i2 &lt; a.length; i2++) {
+&nbsp;                // New nodes are created and values are added
+&nbsp;                fresh2 = new Node(); // Node class is created
+&nbsp;                fresh2.val = a[i2]; // Value is stored in the value part of the Node
+&nbsp;                if (start2 == null) {
+&nbsp;                    start2 = fresh2;
+&nbsp;                } else {
+&nbsp;                    prev2.next = fresh2;
+&nbsp;                }
+&nbsp;                prev2 = fresh2;
+&nbsp;            }
+&nbsp;            start2 = mm.sortByHeapSort(start2);
+&nbsp;            // method is being called
+&nbsp;            int i3 = 0;
+&nbsp;            for (ptr2 = start2; ptr2 != null; ptr2 = ptr2.next) {
+&nbsp;                a[i3++] = ptr2.val;
+&nbsp;                // storing the sorted values in the array
+&nbsp;            }
+&nbsp;            Arrays.sort(b);
+&nbsp;            // array b is sorted and it will return true when checked with sorted list
+&nbsp;            LinkListSort uu2 = new LinkListSort();
+&nbsp;            return uu2.compare(a, b);
+&nbsp;            // The given array and the expected array is checked if both are same then true
+&nbsp;            // is displayed else false is displayed
+&nbsp;        default:
+&nbsp;            // default is used incase user puts a unauthorized value
+&nbsp;            System.out.println(&quot;Wrong choice&quot;);
+&nbsp;        }
+&nbsp;        // Switch case is used to call the classes as per the user requirement
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * OUTPUT :
+&nbsp;     * Input - {89,56,98,123,26,75,12,40,39,68,91} is same for all the 3 classes
+&nbsp;     * Output: [12 26 39 40 56 68 75 89 91 98 123] is same for all the 3 classes
+&nbsp;     * 1st approach Time Complexity : O(n logn)
+&nbsp;     * Auxiliary Space Complexity : O(n)
+&nbsp;     * 2nd approach Time Complexity : O(n^2)
+&nbsp;     * Auxiliary Space Complexity : O(n)
+&nbsp;     * 3rd approach Time Complexity : O(n logn)
+&nbsp;     * Auxiliary Space Complexity : O(n)
+&nbsp;     */
+&nbsp;    boolean compare(int[] a, int[] b) {
+&nbsp;        for (int i = 0; i &lt; a.length; i++) {
+&nbsp;            if (a[i] != b[i]) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        return true;
+&nbsp;        // Both the arrays are checked for equalness. If both are equal then true is
+&nbsp;        // returned else false is returned
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;class Node {
+&nbsp;
+&nbsp;    int val;
+&nbsp;    Node next;
+&nbsp;    // Node class for creation of linklist nodes
+&nbsp;}
+&nbsp;
+<b class="nc">&nbsp;class Task {</b>
+&nbsp;
+&nbsp;    private int[] a;
+&nbsp;
+&nbsp;    public Node sortByMergeSort(Node head) {
+<b class="nc">&nbsp;        if (head == null || head.next == null) {</b>
+<b class="nc">&nbsp;            return head;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        int c = count(head);</b>
+<b class="nc">&nbsp;        a = new int[c];</b>
+&nbsp;        // Array of size c is created
+<b class="nc">&nbsp;        int i = 0;</b>
+<b class="nc">&nbsp;        for (Node ptr = head; ptr != null; ptr = ptr.next) {</b>
+<b class="nc">&nbsp;            a[i++] = ptr.val;</b>
+&nbsp;        }
+&nbsp;        // values are stored in the array
+<b class="nc">&nbsp;        i = 0;</b>
+<b class="nc">&nbsp;        task(a, 0, c - 1);</b>
+&nbsp;        // task method will be executed
+<b class="nc">&nbsp;        for (Node ptr = head; ptr != null; ptr = ptr.next) {</b>
+<b class="nc">&nbsp;            ptr.val = a[i++];</b>
+&nbsp;            // Value is stored in the linklist after being sorted
+&nbsp;        }
+<b class="nc">&nbsp;        return head;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    int count(Node head) {
+<b class="nc">&nbsp;        int c = 0;</b>
+&nbsp;        Node ptr;
+<b class="nc">&nbsp;        for (ptr = head; ptr != null; ptr = ptr.next) {</b>
+<b class="nc">&nbsp;            c++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return c;</b>
+&nbsp;        // This Method is used to count number of elements/nodes present in the linklist
+&nbsp;        // It will return a integer type value denoting the number of nodes present
+&nbsp;    }
+&nbsp;
+&nbsp;    void task(int[] n, int i, int j) {
+<b class="nc">&nbsp;        if (i &lt; j) {</b>
+<b class="nc">&nbsp;            int m = (i + j) / 2;</b>
+<b class="nc">&nbsp;            task(n, i, m);</b>
+<b class="nc">&nbsp;            task(n, m + 1, j);</b>
+<b class="nc">&nbsp;            task1(n, i, m, j);</b>
+&nbsp;            // Array is halved and sent for sorting
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void task1(int[] n, int s, int m, int e) {
+<b class="nc">&nbsp;        int i = s;</b>
+<b class="nc">&nbsp;        int k = 0;</b>
+<b class="nc">&nbsp;        int j = m + 1;</b>
+<b class="nc">&nbsp;        int[] b = new int[e - s + 1];</b>
+<b class="nc">&nbsp;        while (i &lt;= m &amp;&amp; j &lt;= e) {</b>
+<b class="nc">&nbsp;            if (n[j] &gt;= n[i]) {</b>
+<b class="nc">&nbsp;                b[k++] = n[i++];</b>
+&nbsp;            } else {
+<b class="nc">&nbsp;                b[k++] = n[j++];</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;        // Smallest number is stored after checking from both the arrays
+<b class="nc">&nbsp;        while (i &lt;= m) {</b>
+<b class="nc">&nbsp;            b[k++] = n[i++];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        while (j &lt;= e) {</b>
+<b class="nc">&nbsp;            b[k++] = n[j++];</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int p = s; p &lt;= e; p++) {</b>
+<b class="nc">&nbsp;            a[p] = b[p - s];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    // The method task and task1 is used to sort the linklist using merge sort
+&nbsp;}
+&nbsp;
+&nbsp;class Task1 {
+&nbsp;
+&nbsp;    public Node sortByInsertionSort(Node head) {
+&nbsp;        if (head == null || head.next == null) {
+&nbsp;            return head;
+&nbsp;        }
+&nbsp;        int c = count(head);
+&nbsp;        int[] a = new int[c];
+&nbsp;        // Array of size c is created
+&nbsp;        a[0] = head.val;
+&nbsp;        int i;
+&nbsp;        Node ptr;
+&nbsp;        for (ptr = head.next, i = 1; ptr != null; ptr = ptr.next, i++) {
+&nbsp;            int j = i - 1;
+&nbsp;            while (j &gt;= 0 &amp;&amp; a[j] &gt; ptr.val) {
+&nbsp;                // values are stored in the array
+&nbsp;                a[j + 1] = a[j];
+&nbsp;                j--;
+&nbsp;            }
+&nbsp;            a[j + 1] = ptr.val;
+&nbsp;        }
+&nbsp;        i = 0;
+&nbsp;        for (ptr = head; ptr != null; ptr = ptr.next) {
+&nbsp;            ptr.val = a[i++];
+&nbsp;            // Value is stored in the linklist after being sorted
+&nbsp;        }
+&nbsp;        return head;
+&nbsp;    }
+&nbsp;
+&nbsp;    static int count(Node head) {
+&nbsp;        Node ptr;
+&nbsp;        int c = 0;
+&nbsp;        for (ptr = head; ptr != null; ptr = ptr.next) {
+&nbsp;            c++;
+&nbsp;        }
+&nbsp;        return c;
+&nbsp;        // This Method is used to count number of elements/nodes present in the linklist
+&nbsp;        // It will return a integer type value denoting the number of nodes present
+&nbsp;    }
+&nbsp;    // The method task and task1 is used to sort the linklist using insertion sort
+&nbsp;}
+&nbsp;
+&nbsp;class Task2 {
+&nbsp;
+&nbsp;    public Node sortByHeapSort(Node head) {
+&nbsp;        if (head == null || head.next == null) {
+&nbsp;            return head;
+&nbsp;        }
+&nbsp;        int c = count(head);
+&nbsp;        int[] a = new int[c];
+&nbsp;        // Array of size c is created
+&nbsp;        int i = 0;
+&nbsp;        for (Node ptr = head; ptr != null; ptr = ptr.next) {
+&nbsp;            a[i++] = ptr.val;
+&nbsp;            // values are stored in the array
+&nbsp;        }
+&nbsp;        i = 0;
+&nbsp;        task(a);
+&nbsp;        for (Node ptr = head; ptr != null; ptr = ptr.next) {
+&nbsp;            ptr.val = a[i++];
+&nbsp;            // Value is stored in the linklist after being sorted
+&nbsp;        }
+&nbsp;        return head;
+&nbsp;    }
+&nbsp;
+&nbsp;    int count(Node head) {
+&nbsp;        int c = 0;
+&nbsp;        Node ptr;
+&nbsp;        for (ptr = head; ptr != null; ptr = ptr.next) {
+&nbsp;            c++;
+&nbsp;        }
+&nbsp;        return c;
+&nbsp;        // This Method is used to count number of elements/nodes present in the linklist
+&nbsp;        // It will return a integer type value denoting the number of nodes present
+&nbsp;    }
+&nbsp;
+&nbsp;    void task(int[] n) {
+&nbsp;        int k = n.length;
+&nbsp;        for (int i = k / 2 - 1; i &gt;= 0; i--) {
+&nbsp;            task1(n, k, i);
+&nbsp;        }
+&nbsp;        for (int i = k - 1; i &gt; 0; i--) {
+&nbsp;            int d = n[0];
+&nbsp;            n[0] = n[i];
+&nbsp;            n[i] = d;
+&nbsp;            task1(n, i, 0);
+&nbsp;            // recursive calling of task1 method
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void task1(int[] n, int k, int i) {
+&nbsp;        int p = i;
+&nbsp;        int l = 2 * i + 1;
+&nbsp;        int r = 2 * i + 2;
+&nbsp;        if (l &lt; k &amp;&amp; n[l] &gt; n[p]) {
+&nbsp;            p = l;
+&nbsp;        }
+&nbsp;        if (r &lt; k &amp;&amp; n[r] &gt; n[p]) {
+&nbsp;            p = r;
+&nbsp;        }
+&nbsp;        if (p != i) {
+&nbsp;            int d = n[p];
+&nbsp;            n[p] = n[i];
+&nbsp;            n[i] = d;
+&nbsp;            task1(n, k, p);
+&nbsp;        }
+&nbsp;    }
+&nbsp;    // The method task and task1 is used to sort the linklist using heap sort
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

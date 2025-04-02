@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > CombSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: CombSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CombSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;/**
+&nbsp; * Comb Sort algorithm implementation
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Best-case performance O(n * log(n)) Worst-case performance O(n ^ 2)
+&nbsp; * Worst-case space complexity O(1)
+&nbsp; *
+&nbsp; * &lt;p&gt;
+&nbsp; * Comb sort improves on bubble sort.
+&nbsp; *
+&nbsp; * @author Sandeep Roy (https://github.com/sandeeproy99)
+&nbsp; * @author Podshivalov Nikita (https://github.com/nikitap492)
+&nbsp; * @see BubbleSort
+&nbsp; * @see SortAlgorithm
+&nbsp; */
+<b class="nc">&nbsp;class CombSort implements SortAlgorithm {</b>
+&nbsp;    private static final double SHRINK_FACTOR = 1.3;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to find the next gap
+&nbsp;     *
+&nbsp;     * @param gap the current gap
+&nbsp;     * @return the next gap value
+&nbsp;     */
+&nbsp;    private int getNextGap(int gap) {
+<b class="nc">&nbsp;        gap = (int) (gap / SHRINK_FACTOR);</b>
+<b class="nc">&nbsp;        return Math.max(gap, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to sort the array using CombSort
+&nbsp;     *
+&nbsp;     * @param arr the array to be sorted
+&nbsp;     * @param &lt;T&gt; the type of elements in the array
+&nbsp;     * @return the sorted array
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] arr) {
+<b class="nc">&nbsp;        int gap = arr.length;</b>
+<b class="nc">&nbsp;        boolean swapped = true;</b>
+&nbsp;
+<b class="nc">&nbsp;        while (gap != 1 || swapped) {</b>
+<b class="nc">&nbsp;            gap = getNextGap(gap);</b>
+<b class="nc">&nbsp;            swapped = performSwaps(arr, gap);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return arr;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to perform the swapping of elements in the array based on the current gap
+&nbsp;     *
+&nbsp;     * @param arr the array to be sorted
+&nbsp;     * @param gap the current gap
+&nbsp;     * @param &lt;T&gt; the type of elements in the array
+&nbsp;     * @return true if a swap occurred, false otherwise
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; boolean performSwaps(final T[] arr, final int gap) {
+<b class="nc">&nbsp;        boolean swapped = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; arr.length - gap; i++) {</b>
+<b class="nc">&nbsp;            if (SortUtils.less(arr[i + gap], arr[i])) {</b>
+<b class="nc">&nbsp;                SortUtils.swap(arr, i, i + gap);</b>
+<b class="nc">&nbsp;                swapped = true;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return swapped;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SortUtils</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: SortUtils (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SortUtils</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    22.2%
+  </span>
+  <span class="absValue">
+    (2/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (3/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (5/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;final class SortUtils {
+&nbsp;    private SortUtils() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Swaps two elements at the given positions in an array.
+&nbsp;     *
+&nbsp;     * @param array the array in which to swap elements
+&nbsp;     * @param i     the index of the first element to swap
+&nbsp;     * @param j     the index of the second element to swap
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     */
+&nbsp;    public static &lt;T&gt; void swap(T[] array, int i, int j) {
+<b class="pc">&nbsp;        if (i != j) {</b>
+<b class="fc">&nbsp;            final T temp = array[i];</b>
+<b class="fc">&nbsp;            array[i] = array[j];</b>
+<b class="fc">&nbsp;            array[j] = temp;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares two elements to see if the first is less than the second.
+&nbsp;     *
+&nbsp;     * @param firstElement  the first element to compare
+&nbsp;     * @param secondElement the second element to compare
+&nbsp;     * @return true if the first element is less than the second, false otherwise
+&nbsp;     */
+&nbsp;    public static &lt;T extends Comparable&lt;T&gt;&gt; boolean less(T firstElement, T secondElement) {
+<b class="nc">&nbsp;        return firstElement.compareTo(secondElement) &lt; 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares two elements to see if the first is greater than the second.
+&nbsp;     *
+&nbsp;     * @param firstElement  the first element to compare
+&nbsp;     * @param secondElement the second element to compare
+&nbsp;     * @return true if the first element is greater than the second, false otherwise
+&nbsp;     */
+&nbsp;    public static &lt;T extends Comparable&lt;T&gt;&gt; boolean greater(T firstElement, T secondElement) {
+<b class="fc">&nbsp;        return firstElement.compareTo(secondElement) &gt; 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Compares two elements to see if the first is greater than or equal to the second.
+&nbsp;     *
+&nbsp;     * @param firstElement  the first element to compare
+&nbsp;     * @param secondElement the second element to compare
+&nbsp;     * @return true if the first element is greater than or equal to the second, false otherwise
+&nbsp;     */
+&nbsp;    static &lt;T extends Comparable&lt;T&gt;&gt; boolean greaterOrEqual(T firstElement, T secondElement) {
+<b class="nc">&nbsp;        return firstElement.compareTo(secondElement) &gt;= 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints the elements of a list to standard output.
+&nbsp;     *
+&nbsp;     * @param listToPrint the list to print
+&nbsp;     */
+&nbsp;    static void print(List&lt;?&gt; listToPrint) {
+<b class="nc">&nbsp;        String result = listToPrint.stream().map(Object::toString).collect(Collectors.joining(&quot; &quot;));</b>
+<b class="nc">&nbsp;        System.out.println(result);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Prints the elements of an array to standard output.
+&nbsp;     *
+&nbsp;     * @param array the array to print
+&nbsp;     */
+&nbsp;    static &lt;T&gt; void print(T[] array) {
+<b class="nc">&nbsp;        System.out.println(Arrays.toString(array));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Flips the order of elements in the specified range of an array.
+&nbsp;     *
+&nbsp;     * @param array the array whose elements are to be flipped
+&nbsp;     * @param left  the left boundary of the range to be flipped (inclusive)
+&nbsp;     * @param right the right boundary of the range to be flipped (inclusive)
+&nbsp;     */
+&nbsp;    public static &lt;T extends Comparable&lt;T&gt;&gt; void flip(T[] array, int left, int right) {
+<b class="nc">&nbsp;        while (left &lt;= right) {</b>
+<b class="nc">&nbsp;            swap(array, left++, right--);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the array is sorted in ascending order.
+&nbsp;     *
+&nbsp;     * @param array the array to check
+&nbsp;     * @return true if the array is sorted in ascending order, false otherwise
+&nbsp;     */
+&nbsp;    public static &lt;T extends Comparable&lt;T&gt;&gt; boolean isSorted(T[] array) {
+<b class="nc">&nbsp;        for (int i = 1; i &lt; array.length; i++) {</b>
+<b class="nc">&nbsp;            if (less(array[i], array[i - 1])) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks whether the list is sorted in ascending order.
+&nbsp;     *
+&nbsp;     * @param list the list to check
+&nbsp;     * @return true if the list is sorted in ascending order, false otherwise
+&nbsp;     */
+&nbsp;    public static &lt;T extends Comparable&lt;T&gt;&gt; boolean isSorted(List&lt;T&gt; list) {
+<b class="nc">&nbsp;        for (int i = 1; i &lt; list.size(); i++) {</b>
+<b class="nc">&nbsp;            if (less(list.get(i), list.get(i - 1))) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

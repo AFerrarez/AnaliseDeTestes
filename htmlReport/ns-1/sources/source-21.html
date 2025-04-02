@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > RadixSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: RadixSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RadixSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import com.thealgorithms.maths.NumberOfDigits;
+&nbsp;import java.util.Arrays;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class provides an implementation of the radix sort algorithm.
+&nbsp; * It sorts an array of nonnegative integers in increasing order.
+&nbsp; */
+&nbsp;public final class RadixSort {
+&nbsp;    private static final int BASE = 10;
+&nbsp;
+&nbsp;    private RadixSort() {
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts an array of nonnegative integers using the radix sort algorithm.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @return the sorted array
+&nbsp;     * @throws IllegalArgumentException if any negative integers are found
+&nbsp;     */
+&nbsp;    public static int[] sort(int[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        checkForNegativeInput(array);</b>
+<b class="nc">&nbsp;        radixSort(array);</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if the array contains any negative integers.
+&nbsp;     *
+&nbsp;     * @param array the array to be checked
+&nbsp;     * @throws IllegalArgumentException if any negative integers are found
+&nbsp;     */
+&nbsp;    private static void checkForNegativeInput(int[] array) {
+<b class="nc">&nbsp;        for (int number : array) {</b>
+<b class="nc">&nbsp;            if (number &lt; 0) {</b>
+<b class="nc">&nbsp;                throw new IllegalArgumentException(&quot;Array contains non-positive integers.&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void radixSort(int[] array) {
+<b class="nc">&nbsp;        final int max = Arrays.stream(array).max().getAsInt();</b>
+<b class="nc">&nbsp;        for (int i = 0, exp = 1; i &lt; NumberOfDigits.numberOfDigits(max); i++, exp *= BASE) {</b>
+<b class="nc">&nbsp;            countingSortByDigit(array, exp);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A utility method to perform counting sort of array[] according to the digit represented by exp.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param exp   the exponent representing the current digit position
+&nbsp;     */
+&nbsp;    private static void countingSortByDigit(int[] array, int exp) {
+<b class="nc">&nbsp;        int[] count = countDigits(array, exp);</b>
+<b class="nc">&nbsp;        accumulateCounts(count);</b>
+<b class="nc">&nbsp;        int[] output = buildOutput(array, exp, count);</b>
+<b class="nc">&nbsp;        copyOutput(array, output);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int[] countDigits(int[] array, int exp) {
+<b class="nc">&nbsp;        int[] count = new int[BASE];</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; array.length; i++) {</b>
+<b class="nc">&nbsp;            count[getDigit(array[i], exp)]++;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return count;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getDigit(int number, int position) {
+<b class="nc">&nbsp;        return (number / position) % BASE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void accumulateCounts(int[] count) {
+<b class="nc">&nbsp;        for (int i = 1; i &lt; BASE; i++) {</b>
+<b class="nc">&nbsp;            count[i] += count[i - 1];</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int[] buildOutput(int[] array, int exp, int[] count) {
+<b class="nc">&nbsp;        int[] output = new int[array.length];</b>
+<b class="nc">&nbsp;        for (int i = array.length - 1; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;            int digit = getDigit(array[i], exp);</b>
+<b class="nc">&nbsp;            output[count[digit] - 1] = array[i];</b>
+<b class="nc">&nbsp;            count[digit]--;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return output;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void copyOutput(int[] array, int[] output) {
+<b class="nc">&nbsp;        System.arraycopy(output, 0, array, 0, array.length);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

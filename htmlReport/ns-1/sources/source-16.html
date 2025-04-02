@@ -1,0 +1,255 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > IntrospectiveSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: IntrospectiveSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IntrospectiveSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;/**
+&nbsp; * Introspective Sort Algorithm Implementation
+&nbsp; *
+&nbsp; * @see &lt;a href=&quot;https://en.wikipedia.org/wiki/Introsort&quot;&gt;IntroSort Algorithm&lt;/a&gt;
+&nbsp; */
+<b class="nc">&nbsp;public class IntrospectiveSort implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    private static final int INSERTION_SORT_THRESHOLD = 16;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts the given array using Introspective Sort, which combines quicksort, heapsort, and insertion sort.
+&nbsp;     *
+&nbsp;     * @param array The array to be sorted
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     * @return The sorted array
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        if (array == null || array.length &lt;= 1) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        final int depth = 2 * (int) (Math.log(array.length) / Math.log(2));</b>
+<b class="nc">&nbsp;        introspectiveSort(array, 0, array.length - 1, depth);</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs introspective sort on the specified subarray.
+&nbsp;     *
+&nbsp;     * @param array The array to be sorted
+&nbsp;     * @param low   The starting index of the subarray
+&nbsp;     * @param high  The ending index of the subarray
+&nbsp;     * @param depth The current depth of recursion
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; void introspectiveSort(T[] array, final int low, int high, final int depth) {
+<b class="nc">&nbsp;        while (high - low &gt; INSERTION_SORT_THRESHOLD) {</b>
+<b class="nc">&nbsp;            if (depth == 0) {</b>
+<b class="nc">&nbsp;                heapSort(array, low, high);</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            final int pivotIndex = partition(array, low, high);</b>
+<b class="nc">&nbsp;            introspectiveSort(array, pivotIndex + 1, high, depth - 1);</b>
+<b class="nc">&nbsp;            high = pivotIndex - 1;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        insertionSort(array, low, high);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Partitions the array around a pivot.
+&nbsp;     *
+&nbsp;     * @param array The array to be partitioned
+&nbsp;     * @param low   The starting index of the subarray
+&nbsp;     * @param high  The ending index of the subarray
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     * @return The index of the pivot
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; int partition(T[] array, final int low, final int high) {
+<b class="nc">&nbsp;        final int pivotIndex = low + (int) (Math.random() * (high - low + 1));</b>
+<b class="nc">&nbsp;        SortUtils.swap(array, pivotIndex, high);</b>
+<b class="nc">&nbsp;        final T pivot = array[high];</b>
+<b class="nc">&nbsp;        int i = low - 1;</b>
+<b class="nc">&nbsp;        for (int j = low; j &lt; high; j++) {</b>
+<b class="nc">&nbsp;            if (array[j].compareTo(pivot) &lt;= 0) {</b>
+<b class="nc">&nbsp;                i++;</b>
+<b class="nc">&nbsp;                SortUtils.swap(array, i, j);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        SortUtils.swap(array, i + 1, high);</b>
+<b class="nc">&nbsp;        return i + 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts a subarray using insertion sort.
+&nbsp;     *
+&nbsp;     * @param array The array to be sorted
+&nbsp;     * @param low   The starting index of the subarray
+&nbsp;     * @param high  The ending index of the subarray
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; void insertionSort(T[] array, final int low, final int high) {
+<b class="nc">&nbsp;        for (int i = low + 1; i &lt;= high; i++) {</b>
+<b class="nc">&nbsp;            final T key = array[i];</b>
+<b class="nc">&nbsp;            int j = i - 1;</b>
+<b class="nc">&nbsp;            while (j &gt;= low &amp;&amp; array[j].compareTo(key) &gt; 0) {</b>
+<b class="nc">&nbsp;                array[j + 1] = array[j];</b>
+<b class="nc">&nbsp;                j--;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            array[j + 1] = key;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts a subarray using heapsort.
+&nbsp;     *
+&nbsp;     * @param array The array to be sorted
+&nbsp;     * @param low   The starting index of the subarray
+&nbsp;     * @param high  The ending index of the subarray
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; void heapSort(T[] array, final int low, final int high) {
+<b class="nc">&nbsp;        final int n = high - low + 1;</b>
+<b class="nc">&nbsp;        for (int i = (n / 2) - 1; i &gt;= 0; i--) {</b>
+<b class="nc">&nbsp;            heapify(array, i, n, low);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        for (int i = high; i &gt; low; i--) {</b>
+<b class="nc">&nbsp;            SortUtils.swap(array, low, i);</b>
+<b class="nc">&nbsp;            heapify(array, 0, i - low, low);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Maintains the heap property for a subarray.
+&nbsp;     *
+&nbsp;     * @param array The array to be heapified
+&nbsp;     * @param i     The index to be heapified
+&nbsp;     * @param n     The size of the heap
+&nbsp;     * @param low   The starting index of the subarray
+&nbsp;     * @param &lt;T&gt;   The type of elements in the array, which must be comparable
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; void heapify(T[] array, final int i, final int n, final int low) {
+<b class="nc">&nbsp;        final int left = 2 * i + 1;</b>
+<b class="nc">&nbsp;        final int right = 2 * i + 2;</b>
+<b class="nc">&nbsp;        int largest = i;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (left &lt; n &amp;&amp; array[low + left].compareTo(array[low + largest]) &gt; 0) {</b>
+<b class="nc">&nbsp;            largest = left;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (right &lt; n &amp;&amp; array[low + right].compareTo(array[low + largest]) &gt; 0) {</b>
+<b class="nc">&nbsp;            largest = right;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        if (largest != i) {</b>
+<b class="nc">&nbsp;            SortUtils.swap(array, low + i, low + largest);</b>
+<b class="nc">&nbsp;            heapify(array, largest, n, low);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

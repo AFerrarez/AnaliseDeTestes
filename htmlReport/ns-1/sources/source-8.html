@@ -1,0 +1,246 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > BucketSort</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: BucketSort (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BucketSort</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * BucketSort class provides a method to sort an array of elements using the Bucket Sort algorithm
+&nbsp; * and implements the SortAlgorithm interface.
+&nbsp; */
+<b class="nc">&nbsp;public class BucketSort implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    // Constant that defines the divisor for determining the number of buckets
+&nbsp;    private static final int BUCKET_DIVISOR = 10;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        T min = findMin(array);</b>
+<b class="nc">&nbsp;        T max = findMax(array);</b>
+<b class="nc">&nbsp;        int numberOfBuckets = calculateNumberOfBuckets(array.length);</b>
+&nbsp;
+<b class="nc">&nbsp;        List&lt;List&lt;T&gt;&gt; buckets = initializeBuckets(numberOfBuckets);</b>
+<b class="nc">&nbsp;        distributeElementsIntoBuckets(array, buckets, min, max, numberOfBuckets);</b>
+&nbsp;
+<b class="nc">&nbsp;        return concatenateBuckets(buckets, array);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Calculates the number of buckets to use based on the size of the array.
+&nbsp;     *
+&nbsp;     * @param arrayLength the length of the array
+&nbsp;     * @return the number of buckets
+&nbsp;     */
+&nbsp;    private int calculateNumberOfBuckets(final int arrayLength) {
+<b class="nc">&nbsp;        return Math.max(arrayLength / BUCKET_DIVISOR, 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initializes a list of empty buckets.
+&nbsp;     *
+&nbsp;     * @param numberOfBuckets the number of buckets to initialize
+&nbsp;     * @param &lt;T&gt; the type of elements to be sorted
+&nbsp;     * @return a list of empty buckets
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; List&lt;List&lt;T&gt;&gt; initializeBuckets(int numberOfBuckets) {
+<b class="nc">&nbsp;        List&lt;List&lt;T&gt;&gt; buckets = new ArrayList&lt;&gt;(numberOfBuckets);</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; numberOfBuckets; i++) {</b>
+<b class="nc">&nbsp;            buckets.add(new ArrayList&lt;&gt;());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return buckets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Distributes elements from the array into the appropriate buckets.
+&nbsp;     *
+&nbsp;     * @param array the array of elements to distribute
+&nbsp;     * @param buckets the list of buckets
+&nbsp;     * @param min the minimum value in the array
+&nbsp;     * @param max the maximum value in the array
+&nbsp;     * @param numberOfBuckets the total number of buckets
+&nbsp;     * @param &lt;T&gt; the type of elements in the array
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; void distributeElementsIntoBuckets(T[] array, List&lt;List&lt;T&gt;&gt; buckets, final T min, final T max, final int numberOfBuckets) {
+<b class="nc">&nbsp;        for (final T element : array) {</b>
+<b class="nc">&nbsp;            int bucketIndex = hash(element, min, max, numberOfBuckets);</b>
+<b class="nc">&nbsp;            buckets.get(bucketIndex).add(element);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Concatenates the sorted buckets back into the original array.
+&nbsp;     *
+&nbsp;     * @param buckets the list of sorted buckets
+&nbsp;     * @param array the original array
+&nbsp;     * @param &lt;T&gt; the type of elements in the array
+&nbsp;     * @return the sorted array
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T[] concatenateBuckets(Iterable&lt;List&lt;T&gt;&gt; buckets, T[] array) {
+<b class="nc">&nbsp;        int index = 0;</b>
+<b class="nc">&nbsp;        for (List&lt;T&gt; bucket : buckets) {</b>
+<b class="nc">&nbsp;            Collections.sort(bucket);</b>
+<b class="nc">&nbsp;            for (T element : bucket) {</b>
+<b class="nc">&nbsp;                array[index++] = element;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The method computes the index of the bucket in which a given element should be placed.
+&nbsp;     * This is done by &quot;normalizing&quot; the element within the range of the array&#39;s minimum (min) and maximum (max) values,
+&nbsp;     * and then mapping this normalized value to a specific bucket index.
+&nbsp;     *
+&nbsp;     * @param element the element of the array
+&nbsp;     * @param min the minimum value in the array
+&nbsp;     * @param max the maximum value in the array
+&nbsp;     * @param numberOfBuckets the total number of buckets
+&nbsp;     * @param &lt;T&gt; the type of elements in the array
+&nbsp;     * @return the index of the bucket
+&nbsp;     */
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; int hash(final T element, final T min, final T max, final int numberOfBuckets) {
+<b class="nc">&nbsp;        double range = max.compareTo(min);</b>
+<b class="nc">&nbsp;        double normalizedValue = element.compareTo(min) / range;</b>
+<b class="nc">&nbsp;        return (int) (normalizedValue * (numberOfBuckets - 1));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T findMin(T[] array) {
+<b class="nc">&nbsp;        T min = array[0];</b>
+<b class="nc">&nbsp;        for (T element : array) {</b>
+<b class="nc">&nbsp;            if (element.compareTo(min) &lt; 0) {</b>
+<b class="nc">&nbsp;                min = element;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return min;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T extends Comparable&lt;T&gt;&gt; T findMax(T[] array) {
+<b class="nc">&nbsp;        T max = array[0];</b>
+<b class="nc">&nbsp;        for (T element : array) {</b>
+<b class="nc">&nbsp;            if (element.compareTo(max) &gt; 0) {</b>
+<b class="nc">&nbsp;                max = element;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return max;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>

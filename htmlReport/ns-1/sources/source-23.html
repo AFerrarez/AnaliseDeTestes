@@ -1,0 +1,177 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > SelectionSortRecursive</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.thealgorithms.sorts</a>
+</div>
+
+<h1>Coverage Summary for Class: SelectionSortRecursive (com.thealgorithms.sorts)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SelectionSortRecursive</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.thealgorithms.sorts;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that implements the Selection Sort algorithm using recursion.
+&nbsp; */
+<b class="nc">&nbsp;public class SelectionSortRecursive implements SortAlgorithm {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sorts an array using recursive selection sort.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array (must be Comparable)
+&nbsp;     * @return the sorted array
+&nbsp;     */
+&nbsp;    public &lt;T extends Comparable&lt;T&gt;&gt; T[] sort(T[] array) {
+<b class="nc">&nbsp;        if (array.length == 0) {</b>
+<b class="nc">&nbsp;            return array;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        recursiveSelectionSort(array, 0);</b>
+<b class="nc">&nbsp;        return array;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Recursively sorts the array using selection sort.
+&nbsp;     *
+&nbsp;     * @param array the array to be sorted
+&nbsp;     * @param index the current index to start sorting from
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array (must be Comparable)
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; void recursiveSelectionSort(T[] array, final int index) {
+<b class="nc">&nbsp;        if (index == array.length - 1) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        SortUtils.swap(array, index, findMinIndex(array, index));</b>
+&nbsp;
+&nbsp;        // Recursively call selection sort for the remaining array
+<b class="nc">&nbsp;        recursiveSelectionSort(array, index + 1);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Finds the index of the minimum element in the array starting from the given index.
+&nbsp;     *
+&nbsp;     * @param array the array to search
+&nbsp;     * @param start the starting index for the search
+&nbsp;     * @param &lt;T&gt;   the type of elements in the array
+&nbsp;     * @return the index of the minimum element
+&nbsp;     */
+&nbsp;    private static &lt;T extends Comparable&lt;T&gt;&gt; int findMinIndex(T[] array, final int start) {
+&nbsp;        // Base case: if start is the last index, return start
+<b class="nc">&nbsp;        if (start == array.length - 1) {</b>
+<b class="nc">&nbsp;            return start;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Recursive call to find the minimum index in the rest of the array
+<b class="nc">&nbsp;        final int minIndexInRest = findMinIndex(array, start + 1);</b>
+&nbsp;
+&nbsp;        // Return the index of the smaller element between array[start] and the minimum element in the rest of the array
+<b class="nc">&nbsp;        return array[start].compareTo(array[minIndexInRest]) &lt; 0 ? start : minIndexInRest;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-02 09:41</div>
+</div>
+</body>
+</html>
